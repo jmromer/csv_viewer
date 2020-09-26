@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>CSV Viewer</title>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    </head>
+    <body>
+        <noscript>Please enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+
+        <!--
+        POST /api/csv-files/ HTTP/1.1
+        Accept-Encoding: gzip, deflate
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+        Content-Length: 1585
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundarySbQmbjO1d7BAB3HQ
+        Cookie: csrftoken=rh4Z8Y8AopFTNW6JYII8oOs7lFlHhJ4EojMVAlo8xFAp3sfL7zGUYMkWYBqE2gLh
+        Host: localhost:8000
+        Origin: http://localhost:8000
+        Referer: http://localhost:8000/
+        Upgrade-Insecure-Requests: 1
+        -->
+
+        <form method="POST" action="/api/csv-files/" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Upload" />
+        </form>
+
+        <!-- {% load static %}
+             <script src="{% static "client/main.js" %}"></script> -->
+    </body>
+</html>
