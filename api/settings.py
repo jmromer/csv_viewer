@@ -35,16 +35,16 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'webpack_loader',
-    'django_redis',
     'django_extensions',
+    'django_redis',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'api.middleware.cors',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
