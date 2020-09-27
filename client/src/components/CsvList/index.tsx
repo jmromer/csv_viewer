@@ -1,13 +1,19 @@
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import api, { CsvFile } from 'api';
 import CsvLinkItem from 'components/CsvLinkItem';
-import React, { useState, useEffect, useCallback } from 'react';
-import api, { CsvFile } from 'api'
+import CsvUploader from 'components/CsvUploader';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme : Theme) =>
   createStyles({
+    button: {
+      margin: '32px'
+    },
     demo: {
       backgroundColor: theme.palette.background.paper,
       color: '#000',
@@ -25,6 +31,7 @@ const useStyles = makeStyles((theme : Theme) =>
 export default function CsvList() {
   const classes = useStyles();
   const [csvList, setCsvList] = useState([]);
+  const [isUploaderOpen, setIsUploaderOpen] = useState(false);
 
   const fetchCsvList = useCallback(async () => {
     try {
@@ -39,14 +46,33 @@ export default function CsvList() {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h6" className={classes.title}>
-        Available CSV Files
-      </Typography>
+      <CsvUploader
+        open={isUploaderOpen}
+        setOpen={setIsUploaderOpen}
+      />
+
+      <Grid container spacing={3}>
+        <Grid item xs={9}>
+          <Typography variant="h6" className={classes.title}>
+            Available CSV Files
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => setIsUploaderOpen(true)}>
+            Upload
+          </Button>
+        </Grid>
+      </Grid>
 
       <div className={classes.demo}>
         <List dense={false} className={classes.list}>
           {csvList.map((csv : CsvFile) => (
             <CsvLinkItem
+              key={csv.id}
               to={`/csv/${csv.id}`}
               primary={csv.name}
               secondary={csv.created_at}

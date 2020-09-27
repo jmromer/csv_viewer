@@ -3,7 +3,6 @@ import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import { useTheme } from '@material-ui/core/styles';
-import BackupIcon from '@material-ui/icons/Backup';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TocIcon from '@material-ui/icons/Toc';
@@ -41,7 +40,6 @@ export default function AppDrawer(props : AppDrawerProps) {
       <Divider />
       <List>
         <ListItemLink icon={<TocIcon />} primary="All CSVs" to="/list" />
-        <ListItemLink icon={<BackupIcon />} primary="Upload CSV" to="/upload" />
       </List>
     </Drawer>
   )
