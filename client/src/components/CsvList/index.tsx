@@ -3,7 +3,8 @@ import List from '@material-ui/core/List';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CsvLinkItem from 'components/CsvLinkItem';
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import api, { CsvFile } from 'api'
 
 const useStyles = makeStyles((theme : Theme) =>
   createStyles({
@@ -23,6 +24,18 @@ const useStyles = makeStyles((theme : Theme) =>
 
 export default function CsvList() {
   const classes = useStyles();
+  const [csvList, setCsvList] = useState([]);
+
+  const fetchCsvList = useCallback(async () => {
+    try {
+      const resp = await api.csvList()
+      setCsvList(resp)
+    } catch {
+      setCsvList([])
+    }
+  }, [])
+
+  useEffect(() => { fetchCsvList() }, [fetchCsvList])
 
   return (
     <Container maxWidth="sm">
@@ -32,11 +45,13 @@ export default function CsvList() {
 
       <div className={classes.demo}>
         <List dense={false} className={classes.list}>
-          <CsvLinkItem
-            to="/csv/1"
-            primary={'filename.csv'}
-            secondary={'8/3/2020'}
-          />
+          {csvList.map((csv : CsvFile) => (
+            <CsvLinkItem
+              to={`/csv/${csv.id}`}
+              primary={csv.name}
+              secondary={csv.created_at}
+            />
+          ))}
         </List>
       </div>
     </Container>
