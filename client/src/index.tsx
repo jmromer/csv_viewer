@@ -1,14 +1,24 @@
+import App from 'components/App';
+import 'index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import 'index.css';
-import App from 'components/App';
 import * as serviceWorker from 'serviceWorker';
+import api from 'api'
+
+declare global {
+  interface Window {
+    list : any;
+    csv : any;
+    create : any;
+  }
+}
+
+api.csvList().then(list => window.list = list)
+api.csvFind(1).then(csv => window.csv = csv)
+window.create = api.csvCreate
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <React.StrictMode><App /></React.StrictMode>,
   document.getElementById('root')
 );
 
