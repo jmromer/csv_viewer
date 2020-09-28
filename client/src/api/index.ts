@@ -8,10 +8,7 @@ export interface CsvFile {
   created_at: string
 }
 
-const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
-  timeout: 1000
-})
+const api = axios.create({ baseURL: 'http://localhost:8000/api' })
 
 async function csvCreate(file: File) {
   const formData = new FormData()
