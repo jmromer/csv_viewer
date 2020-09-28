@@ -1,44 +1,39 @@
 import MuiTopBar from '@material-ui/core/AppBar'
-import IconButton from '@material-ui/core/IconButton'
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import MenuIcon from '@material-ui/icons/Menu'
-import clsx from 'clsx'
+import TocIcon from '@material-ui/icons/Toc'
+import ListItemLink from 'components/ListItemLink'
 import React from 'react'
 import useStyles from 'styles'
 
-interface DrawerHandler {
-  (): void
-}
-
-interface AppBarProps {
-  drawerIsOpen: boolean
-  handleDrawerOpen: DrawerHandler
-}
-
-export default function AppBar(props: AppBarProps) {
+export default function AppBar() {
   const classes = useStyles()
-  const { drawerIsOpen, handleDrawerOpen } = props
-
   return (
-    <MuiTopBar
-      position='fixed'
-      className={clsx(classes.appBar, { [classes.appBarShift]: drawerIsOpen })}
-    >
-      <Toolbar>
-        <IconButton
-          color='inherit'
-          aria-label='open drawer'
-          onClick={handleDrawerOpen}
-          edge='start'
-          className={clsx(classes.menuButton, drawerIsOpen && classes.hide)}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant='h6' noWrap>
-          CSV Browser
+    <>
+      <MuiTopBar position='fixed' className={classes.appBar}>
+        <Toolbar>
+          <Typography variant='h6' noWrap>
+            CSV Browser
         </Typography>
-      </Toolbar>
-    </MuiTopBar>
+        </Toolbar>
+      </MuiTopBar>
+
+      <Drawer
+        className={classes.drawer}
+        variant='permanent'
+        classes={{ paper: classes.drawerPaper }}
+      >
+        <Toolbar />
+        <List>
+          <ListItemLink
+            icon={<TocIcon style={{ color: '#fff' }} />}
+            primary='All CSVs'
+            to='/list'
+          />
+        </List>
+      </Drawer>
+    </>
   )
 }

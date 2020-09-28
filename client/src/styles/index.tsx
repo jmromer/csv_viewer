@@ -1,26 +1,15 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      color: '#fff'
+      color: '#fff',
     },
     appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
+      zIndex: theme.zIndex.drawer + 1,
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -30,10 +19,13 @@ export default makeStyles((theme: Theme) =>
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0
+      flexShrink: 0,
+      color: '#fff',
     },
     drawerPaper: {
-      width: drawerWidth
+      width: drawerWidth,
+      backgroundColor: '#424242 !important',
+      color: '#fff !important'
     },
     drawerHeader: {
       display: 'flex',
@@ -43,14 +35,12 @@ export default makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end'
     },
+    drawerContainer: {
+      overflow: 'auto',
+    },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      marginLeft: -drawerWidth
     },
     contentShift: {
       transition: theme.transitions.create('margin', {

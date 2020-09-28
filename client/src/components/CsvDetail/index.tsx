@@ -91,7 +91,7 @@ export default function CsvPage({ match }: RouteComponentProps<RouteParams>) {
                 {aggregations[key].name}
               </Typography>
               <div className={classes.table}>
-                <DataGrid {...aggregations[key].data} pageSize={10} />
+                <DataGrid {...aggregations[key].data} pageSize={100} />
               </div>
             </React.Fragment>
           ))
