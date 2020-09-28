@@ -23,15 +23,19 @@ class CsvFileViewSet(viewsets.ViewSet):
     def create(self, request, format=None):
         try:
             form = UploadCsvFileForm(request.POST, request.FILES)
+            attachment = request.FILES['file']
+
             if form.is_valid():
-                CsvFile(file=request.FILES['file']).save()
+                CsvFile(file=attachment).save()
                 return Response(None, status=status.HTTP_201_CREATED)
+
             messages = [{
                 field: message
             } for field, errors in form.errors.items() for message in errors]
             raise AttachmentError(*messages)
-        except IntegrityError:
-            data = {'errors': ['file: already exists.']}
+
+        except IntegrityError as err:
+            data = {'errors': ['This file has already been saved.']}
             return Response(data, status=status.HTTP_409_CONFLICT)
         except Exception as err:
             data = {'errors': err.args}
@@ -48,6 +52,15 @@ class CsvFileViewSet(viewsets.ViewSet):
                 context={'request': request},
             )
             return Response(serializer.data)
+        except CsvFile.DoesNotExist as err:
+            data = {'errors': err.args}
+            return Response(data, status=status.HTTP_404_NOT_FOUND)
+
+    def destroy(self, request, pk=None, format=None):
+        try:
+            csv_file = CsvFile.objects.get(pk=pk)
+            csv_file.delete()
+            return Response(None)
         except CsvFile.DoesNotExist as err:
             data = {'errors': err.args}
             return Response(data, status=status.HTTP_404_NOT_FOUND)

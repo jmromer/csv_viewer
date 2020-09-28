@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import TableChartIcon from '@material-ui/icons/TableChart'
 import React from 'react'
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
+import api from 'api'
 
 const useStyles = makeStyles(_ =>
   createStyles({
@@ -27,13 +28,14 @@ const useStyles = makeStyles(_ =>
 )
 
 interface CsvLinkItemProps {
+  id: number
   primary: string
   secondary?: string
   to: string
 }
 
 export default function CsvLinkItem(props: CsvLinkItemProps) {
-  const { primary, secondary, to } = props
+  const { id, primary, secondary, to } = props
   const classes = useStyles()
 
   const renderLink = React.useMemo(
@@ -43,6 +45,16 @@ export default function CsvLinkItem(props: CsvLinkItemProps) {
       )),
     [to]
   )
+
+  async function handleDelete(id: number) {
+    const resp = await api.csvDelete(id)
+
+    if (resp.success) {
+      window.location.replace('/') // TODO: Fix this
+    } else {
+      console.error(resp.errors)
+    }
+  }
 
   return (
     <ListItem button component={renderLink}>
@@ -59,7 +71,7 @@ export default function CsvLinkItem(props: CsvLinkItemProps) {
       />
 
       <ListItemSecondaryAction>
-        <IconButton edge='end' aria-label='delete'>
+        <IconButton edge='end' aria-label='delete' onClick={() => handleDelete(id)}>
           <DeleteIcon className={classes.trashCan} />
         </IconButton>
       </ListItemSecondaryAction>
