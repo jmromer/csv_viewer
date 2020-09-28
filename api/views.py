@@ -24,10 +24,12 @@ class CsvFileViewSet(viewsets.ViewSet):
     def create(self, request, format=None):
         try:
             form = UploadCsvFileForm(request.POST, request.FILES)
+            # TODO: Allow multiple file upload
             attachment = request.FILES['file']
 
             if form.is_valid():
                 CsvFile(file=attachment).save()
+                # TODO: Enqueue processing and caching in the background
                 return Response(None, status=status.HTTP_201_CREATED)
 
             messages = [{
@@ -36,6 +38,7 @@ class CsvFileViewSet(viewsets.ViewSet):
             raise AttachmentError(*messages)
 
         except IntegrityError as err:
+            # TODO: Delete attachment record if not saved
             data = {'errors': ['This file has already been saved.']}
             return Response(data, status=status.HTTP_409_CONFLICT)
         except Exception as err:
