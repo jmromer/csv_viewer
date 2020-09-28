@@ -10,13 +10,16 @@ export interface CsvFile {
 
 const api = axios.create({ baseURL: 'http://localhost:8000/api' })
 
+// TODO: parse cookie intelligently
+const csrfToken = document.cookie.split("=")[1]
+
 async function csvCreate(file: File) {
   const formData = new FormData()
   formData.append('file', file)
 
   try {
     await api.post('/csv-files/', formData, {
-      headers: { 'X-CSRFToken': document.cookie.split("=")[1] }
+      headers: { 'X-CSRFToken': csrfToken }
     })
     return { 'success': true }
   } catch ({ response: { data: { errors } } }) {
@@ -27,7 +30,7 @@ async function csvCreate(file: File) {
 async function csvDelete(id: number) {
   try {
     await api.delete(`/csv-files/${id}/`, {
-      headers: { 'X-CSRFToken': document.cookie.split("=")[1] }
+      headers: { 'X-CSRFToken': csrfToken }
     })
     return { 'success': true }
   } catch {
