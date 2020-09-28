@@ -46,10 +46,7 @@ export default function CsvList() {
 
   return (
     <Container maxWidth='sm'>
-      <CsvUploader
-        open={isUploaderOpen}
-        setOpen={setIsUploaderOpen}
-      />
+      <CsvUploader open={isUploaderOpen} setOpen={setIsUploaderOpen} />
 
       <Grid container spacing={3}>
         <Grid item xs={9}>
@@ -68,18 +65,25 @@ export default function CsvList() {
         </Grid>
       </Grid>
 
-      <div className={classes.demo}>
-        <List dense={false} className={classes.list}>
-          {csvList.map((csv: CsvFile) => (
-            <CsvLinkItem
-              key={csv.id}
-              to={`/csv/${csv.id}`}
-              primary={csv.name}
-              secondary={csv.created_at}
-            />
-          ))}
-        </List>
-      </div>
+      {
+        !csvList.length
+          ? <div style={{ textAlign: 'center' }}>No files found.</div>
+          : (
+            <div className={classes.demo}>
+              <List dense={false} className={classes.list}>
+                {csvList.map((csv: CsvFile) => (
+                  <CsvLinkItem
+                    key={csv.id}
+                    id={csv.id}
+                    to={`/csv/${csv.id}`}
+                    primary={csv.name}
+                    secondary={csv.created_at}
+                  />
+                ))}
+              </List>
+            </div>
+          )
+      }
     </Container>
   )
 }
