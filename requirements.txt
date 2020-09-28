@@ -15,6 +15,7 @@ blas=1.0=mkl
 ca-certificates=2020.7.22=0
 certifi=2020.6.20=py38_0
 chardet=3.0.4=pypi_0
+click=7.1.2=py_0
 colorama=0.4.3=pypi_0
 decorator=4.4.2=pypi_0
 distlib=0.3.1=pypi_0
@@ -91,6 +92,7 @@ pytest-django=3.10.0=pyh9f0ad1d_0
 pytest-mock=3.2.0=py_0
 python=3.8.5=h26836e1_1
 python-dateutil=2.8.1=py_0
+python-dotenv=0.14.0=pyh9f0ad1d_0
 python-jsonrpc-server=0.4.0=py_0
 python-language-server=0.35.1=py_0
 pytz=2020.1=py_0
