@@ -10,28 +10,28 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
 type RouteParams = {
-  id : string
+  id: string
 }
 
 interface CsvDetails {
-  info ?: any
-  data ?: any
-  aggregations ?: any
+  info?: any
+  data?: any
+  aggregations?: any
 }
 
-const useStyles = makeStyles((theme : Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
-      margin: theme.spacing(4, 0, 2),
+      margin: theme.spacing(4, 0, 2)
     },
     table: {
       height: 400,
-      backgroundColor: '#fff',
+      backgroundColor: '#fff'
     }
-  }),
+  })
 )
 
-export default function CsvPage({ match } : RouteComponentProps<RouteParams>) {
+export default function CsvPage({ match }: RouteComponentProps<RouteParams>) {
   const classes = useStyles()
   const { params: { id: csvId } } = match
   const [csvDetails, setCsvDetails] = useState({})
@@ -53,8 +53,8 @@ export default function CsvPage({ match } : RouteComponentProps<RouteParams>) {
   return !info
     ? <CircularProgress />
     : (
-      <Container maxWidth="md">
-        <Typography variant="h5" className={classes.title}>
+      <Container maxWidth='md'>
+        <Typography variant='h5' className={classes.title}>
           File info
         </Typography>
         {
@@ -62,32 +62,32 @@ export default function CsvPage({ match } : RouteComponentProps<RouteParams>) {
             <div>Name: {info.name}</div>
             <div>Created: {info.created_at}</div>
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               style={{ margin: '10px auto' }}
               startIcon={<SaveIcon />}
               href={info.file}
-              target="_blank"
+              target='_blank'
             >
               Save
           </Button>
           </>
         }
 
-        <Typography variant="h5" className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           Data
         </Typography>
         <div className={classes.table}>
           <DataGrid columns={data.columns} rows={data.rows} pageSize={100} />
         </div>
 
-        <Typography variant="h5" className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           Aggregations
         </Typography>
         {
           Object.keys(aggregations).map(key => (
             <React.Fragment key={key}>
-              <Typography variant="h6" className={classes.title}>
+              <Typography variant='h6' className={classes.title}>
                 {aggregations[key].name}
               </Typography>
               <div className={classes.table}>

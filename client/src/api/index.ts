@@ -1,17 +1,17 @@
 import axios from 'axios'
 
 export interface CsvFile {
-  id : number;
-  url : string;
-  file : string;
-  name : string;
-  created_at : string;
+  id: number
+  url: string
+  file: string
+  name: string
+  created_at: string
 }
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api',
-  timeout: 1000,
-});
+  timeout: 1000
+})
 
 async function csvList() {
   try {
@@ -22,7 +22,7 @@ async function csvList() {
   }
 }
 
-async function csvFind(id : number) {
+async function csvDetails(id: string) {
   try {
     const resp = await api.get(`/csv-files/${id}`)
     return resp.data.csv_file
@@ -31,7 +31,7 @@ async function csvFind(id : number) {
   }
 }
 
-async function csvCreate(file : string) {
+async function csvCreate(file: string) {
   try {
     await api.post(
       '/csv-files',
@@ -44,4 +44,4 @@ async function csvCreate(file : string) {
   }
 }
 
-export default { csvList, csvCreate, csvFind }
+export default { csvList, csvCreate, csvDetails }

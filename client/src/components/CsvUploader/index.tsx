@@ -3,14 +3,14 @@ import { DropzoneDialog } from 'material-ui-dropzone';
 import React from 'react';
 
 interface CsvUploaderProps {
-  open : boolean
-  setOpen : (open : boolean) => void
+  open: boolean
+  setOpen: (open: boolean) => void
 }
 
-export default function CsvUploader(props : CsvUploaderProps) {
+export default function CsvUploader(props: CsvUploaderProps) {
   const { open, setOpen } = props
 
-  function handleSave(e : any) {
+  function handleSave(e: any) {
     console.log(e)
   }
 

@@ -1,37 +1,37 @@
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import api, { CsvFile } from 'api';
-import CsvLinkItem from 'components/CsvLinkItem';
-import CsvUploader from 'components/CsvUploader';
-import React, { useCallback, useEffect, useState } from 'react';
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import List from '@material-ui/core/List'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import api, { CsvFile } from 'api'
+import CsvLinkItem from 'components/CsvLinkItem'
+import CsvUploader from 'components/CsvUploader'
+import React, { useCallback, useEffect, useState } from 'react'
 
-const useStyles = makeStyles((theme : Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
       margin: '32px'
     },
     demo: {
       backgroundColor: theme.palette.background.paper,
-      color: '#000',
+      color: '#000'
     },
     list: {
       backgroundColor: '#424242',
       color: '#fff'
     },
     title: {
-      margin: theme.spacing(4, 0, 2),
-    },
-  }),
-);
+      margin: theme.spacing(4, 0, 2)
+    }
+  })
+)
 
 export default function CsvList() {
-  const classes = useStyles();
-  const [csvList, setCsvList] = useState([]);
-  const [isUploaderOpen, setIsUploaderOpen] = useState(false);
+  const classes = useStyles()
+  const [csvList, setCsvList] = useState([])
+  const [isUploaderOpen, setIsUploaderOpen] = useState(false)
 
   const fetchCsvList = useCallback(async () => {
     try {
@@ -45,7 +45,7 @@ export default function CsvList() {
   useEffect(() => { fetchCsvList() }, [fetchCsvList])
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth='sm'>
       <CsvUploader
         open={isUploaderOpen}
         setOpen={setIsUploaderOpen}
@@ -53,14 +53,14 @@ export default function CsvList() {
 
       <Grid container spacing={3}>
         <Grid item xs={9}>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant='h6' className={classes.title}>
             Available CSV Files
           </Typography>
         </Grid>
         <Grid item xs={3}>
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             className={classes.button}
             onClick={() => setIsUploaderOpen(true)}>
             Upload
@@ -70,7 +70,7 @@ export default function CsvList() {
 
       <div className={classes.demo}>
         <List dense={false} className={classes.list}>
-          {csvList.map((csv : CsvFile) => (
+          {csvList.map((csv: CsvFile) => (
             <CsvLinkItem
               key={csv.id}
               to={`/csv/${csv.id}`}
