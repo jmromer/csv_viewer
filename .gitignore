@@ -335,6 +335,7 @@ yarn-error.log*
 client/build/*
 data/example.csv
 media/*.csv
+uploads/*.csv
 
 # Created by https://www.toptal.com/developers/gitignore/api/redis
 # Edit at https://www.toptal.com/developers/gitignore?templates=redis

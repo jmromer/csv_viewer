@@ -26,4 +26,5 @@ class CsvFile(models.Model):
 
 @receiver(post_delete, sender=CsvFile)
 def submission_delete(sender, instance, **kwargs):
-    instance.file.delete(False)
+    if path.exists(instance.file.path):
+        instance.file.delete(False)
