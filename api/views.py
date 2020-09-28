@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db.utils import IntegrityError
 from rest_framework import status, viewsets
 from rest_framework.response import Response
@@ -43,15 +44,19 @@ class CsvFileViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None, format=None):
         try:
-            csv_file = CsvFile.objects.get(pk=pk)
-            csv_data = parse_csv(csv_file.file)
+            data = cache.get(f'csv:{pk}')
+            if not data:
+                csv_file = CsvFile.objects.get(pk=pk)
+                csv_data = parse_csv(csv_file.file)
+                serializer = CsvFilePayloadSerializer(
+                    csv_file,
+                    csv_data,
+                    context={'request': request},
+                )
+                data = serializer.data
+                cache.set(f'csv:{pk}', data)
+            return Response(data)
 
-            serializer = CsvFilePayloadSerializer(
-                csv_file,
-                csv_data,
-                context={'request': request},
-            )
-            return Response(serializer.data)
         except CsvFile.DoesNotExist as err:
             data = {'errors': err.args}
             return Response(data, status=status.HTTP_404_NOT_FOUND)
