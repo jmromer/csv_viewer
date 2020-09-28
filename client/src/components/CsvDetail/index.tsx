@@ -5,9 +5,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { DataGrid } from '@material-ui/data-grid'
 import SaveIcon from '@material-ui/icons/Save'
-import api from 'api'
 import React, { useCallback, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
+
+import api from '../../api'
 
 type RouteParams = {
   id: string

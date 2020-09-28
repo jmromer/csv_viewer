@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --config webpack.config.js",
     "test": "react-scripts test",
     "format": "./node_modules/.bin/standard --pretty $(find src -name '*.ts*')",
     "eject": "react-scripts eject"

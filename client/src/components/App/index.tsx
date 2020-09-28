@@ -1,9 +1,10 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
-import AppBar from 'components/AppBar'
-import AppRouter from 'components/AppRouter'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import useStyles from 'styles'
+
+import AppBar from '../AppBar'
+import AppRouter from '../AppRouter'
+import useStyles from '../../styles'
 
 export default function App() {
   const classes = useStyles()

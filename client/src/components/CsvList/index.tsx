@@ -4,10 +4,11 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import api, { CsvFile } from 'api'
-import CsvLinkItem from 'components/CsvLinkItem'
-import CsvUploader from 'components/CsvUploader'
 import React, { useCallback, useEffect, useState } from 'react'
+
+import CsvLinkItem from '../CsvLinkItem'
+import CsvUploader from '../CsvUploader'
+import api, { CsvFile } from '../../api'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

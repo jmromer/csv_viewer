@@ -1,8 +1,8 @@
-import CsvDetail from 'components/CsvDetail'
-import CsvList from 'components/CsvList'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
+import CsvDetail from '../CsvDetail'
+import CsvList from '../CsvList'
 
 export default function AppRouter() {
   return (

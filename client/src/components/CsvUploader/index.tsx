@@ -1,9 +1,10 @@
 import Snackbar from '@material-ui/core/Snackbar'
 import TableChartIcon from '@material-ui/icons/TableChart'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
-import api from 'api'
 import { DropzoneDialog } from 'material-ui-dropzone'
 import React, { SyntheticEvent, useState } from 'react'
+
+import api from '../../api'
 
 interface CsvUploaderProps {
   open: boolean

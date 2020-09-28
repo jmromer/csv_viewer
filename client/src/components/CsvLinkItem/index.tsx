@@ -9,7 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import TableChartIcon from '@material-ui/icons/TableChart'
 import React from 'react'
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
-import api from 'api'
+
+import api from '../../api'
 
 const useStyles = makeStyles(_ =>
   createStyles({

@@ -4,9 +4,10 @@ import List from '@material-ui/core/List'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import TocIcon from '@material-ui/icons/Toc'
-import ListItemLink from 'components/ListItemLink'
 import React from 'react'
-import useStyles from 'styles'
+
+import ListItemLink from '../ListItemLink'
+import useStyles from '../../styles'
 
 export default function AppBar() {
   const classes = useStyles()
