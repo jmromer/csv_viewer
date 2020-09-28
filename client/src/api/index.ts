@@ -13,35 +13,52 @@ const api = axios.create({
   timeout: 1000
 })
 
-async function csvList() {
+async function csvCreate(file: File) {
+  const formData = new FormData()
+  formData.append('file', file)
+
   try {
-    const resp = await api.get('/csv-files')
-    return resp.data.csv_files
+    await api.post('/csv-files/', formData, {
+      headers: { 'X-CSRFToken': document.cookie.split("=")[1] }
+    })
+    return { 'success': true }
+  } catch ({ response: { data: { errors } } }) {
+    return { 'errors': errors }
+  }
+}
+
+async function csvDelete(id: number) {
+  try {
+    await api.delete(`/csv-files/${id}/`, {
+      headers: { 'X-CSRFToken': document.cookie.split("=")[1] }
+    })
+    return { 'success': true }
   } catch {
-    return { 'errors': ['Failed retrieving csv list.'] }
+    return { 'errors': [`Failed deleting csv with id ${id}.`] }
   }
 }
 
 async function csvDetails(id: string) {
   try {
-    const resp = await api.get(`/csv-files/${id}`)
+    const resp = await api.get(`/csv-files/${id}/`)
     return resp.data.csv_file
   } catch {
     return { 'errors': [`Failed retrieving csv with id ${id}.`] }
   }
 }
 
-async function csvCreate(file: string) {
+async function csvList() {
   try {
-    await api.post(
-      '/csv-files',
-      { 'file': file }, // TODO: Fix data headers, csrf
-      { headers: { 'Content-Type': 'multipart/form-data' } }
-    )
-    return { 'result': 'success' }
+    const resp = await api.get('/csv-files/')
+    return resp.data.csv_files
   } catch {
-    return { 'errors': ['Failed uploading csv.'] }
+    return { 'errors': ['Failed retrieving csv list.'] }
   }
 }
 
-export default { csvList, csvCreate, csvDetails }
+export default {
+  csvCreate,
+  csvDelete,
+  csvDetails,
+  csvList,
+}
