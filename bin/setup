@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -ex
+
+DB_NAME="csv_viewer_dev"
+
+if [[ "$1" == "--down" ]]; then
+   rm -rf ./env ./.env
+   dropdb "${DB_NAME}"
+   exit 0
+fi
+
+pip install virtualenv
+
+virtualenv ./env --python=3.8
+
+. ./env/bin/activate
+
+pip install -U pip
+pip install -r requirements.txt
+
+cp .env.example .env
+
+createdb "${DB_NAME}"
+./manage.py migrate
+
+npm run build && ./manage.py runserver
