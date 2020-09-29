@@ -11,7 +11,7 @@ export interface CsvFile {
 const api = axios.create({ baseURL: 'http://localhost:8000/api' })
 
 // TODO: parse cookie intelligently
-const csrfToken = document.cookie.split("=")[1]
+const csrfToken = document.cookie.split('=')[1]
 
 async function csvCreate(file: File) {
   const formData = new FormData()
@@ -60,5 +60,5 @@ export default {
   csvCreate,
   csvDelete,
   csvDetails,
-  csvList,
+  csvList
 }

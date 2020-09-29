@@ -12,7 +12,7 @@ interface CsvUploaderProps {
 }
 
 function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+  return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 
 export default function CsvUploader({ open, setOpen }: CsvUploaderProps) {
@@ -42,7 +42,7 @@ export default function CsvUploader({ open, setOpen }: CsvUploaderProps) {
         open={errorsOpen}
         autoHideDuration={6000}
         onClose={handleErrorClose}>
-        <Alert onClose={handleErrorClose} severity="error">
+        <Alert onClose={handleErrorClose} severity='error'>
           {errorMessage}
         </Alert>
       </Snackbar>

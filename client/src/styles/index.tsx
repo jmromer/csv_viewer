@@ -6,10 +6,10 @@ export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      color: '#fff',
+      color: '#fff'
     },
     appBar: {
-      zIndex: theme.zIndex.drawer + 1,
+      zIndex: theme.zIndex.drawer + 1
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -20,7 +20,7 @@ export default makeStyles((theme: Theme) =>
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
-      color: '#fff',
+      color: '#fff'
     },
     drawerPaper: {
       width: drawerWidth,
@@ -36,11 +36,11 @@ export default makeStyles((theme: Theme) =>
       justifyContent: 'flex-end'
     },
     drawerContainer: {
-      overflow: 'auto',
+      overflow: 'auto'
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(3)
     },
     contentShift: {
       transition: theme.transitions.create('margin', {
